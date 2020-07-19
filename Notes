@@ -1,0 +1,11 @@
+Node - javascript runtime. Node is used to execute javascript code outside the browser in some arbitrary environment
+Express - Library that runs in the Node runtime. Has helpers to make dealing with HTTP traffic easier. Express is not standalone. 
+          Its a library within Node to handle HTTP traffic. It's just a helper, and everything in Express can be written from scratch from Node.
+
+          HTTP Request -> Node -> Express. Express looks at the request and then decides
+          which chunk of code will handle or respond to the request, and chooses the appropriate route handler.
+          Express has several route handlers which generate a response.
+          Response -> Node. Node processes the response and sends it back to whoever made the HTTP request
+
+          
+
