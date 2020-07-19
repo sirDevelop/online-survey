@@ -8,4 +8,17 @@ Express - Library that runs in the Node runtime. Has helpers to make dealing wit
           Response -> Node. Node processes the response and sends it back to whoever made the HTTP request
 
           
+After running heroku create,
+we get back 2 URLs.
+https://pacific-sea-06207.herokuapp.com/ | https://git.heroku.com/pacific-sea-06207.git
 
+First is link to heroku app, second is link our deployment target. It is remote.
+We push to this remote git repo for the app. When we push to that git repo, it deploys our application and starts it up automatically
+
+If running the command tells you that 'remote heroku already exists' that is fine. No output at all also fine
+
+git push heroku master
+git push [remote] [local]
+
+'heroku open' will open our application
+'heroku log' will give you logs about the heroku app in case something went wrong

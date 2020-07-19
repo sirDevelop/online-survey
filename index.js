@@ -11,7 +11,7 @@ const app = express();
 
 // second argument is an arrow function. All counts as one argument
 app.get("/", (req, res) => {
-  res.send({ hi: "there" });
+  res.send({ bye: "buddy" });
   // send JSON back to whoever made this request
 });
 // app is express app to register this route handler with
