@@ -17,8 +17,21 @@ We push to this remote git repo for the app. When we push to that git repo, it d
 
 If running the command tells you that 'remote heroku already exists' that is fine. No output at all also fine
 
+After committing, then run:
 git push heroku master
 git push [remote] [local]
 
 'heroku open' will open our application
 'heroku log' will give you logs about the heroku app in case something went wrong
+
+After we commit with git, we simply just push to heroku and it will start deployment again
+
+Passport Library Components:
+
+Passport - General helpers for handling authentication in Express Apps
+Passport Strategy: Helpers for authenticating with one very specific method (email/passsword, Google, Facebook, etc)
+
+Credentials - Google Cloud Platform
+
+Your Client ID: 211274296054-a5fsuamhtpfhh78seqfbamr9tfsvhcc2.apps.googleusercontent.com
+Your Client Secret: ulN9X-wG9CwNoOoergUGuX2J
