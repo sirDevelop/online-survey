@@ -35,3 +35,41 @@ Credentials - Google Cloud Platform
 
 Your Client ID: 211274296054-a5fsuamhtpfhh78seqfbamr9tfsvhcc2.apps.googleusercontent.com
 Your Client Secret: ulN9X-wG9CwNoOoergUGuX2J
+
+http://localhost:5000/auth/google/callback?code=4%2F2AFFBxt82KqlUzW_ruXkOryAdJr93x6th1O2Ty2JATjacpsnsXi-ltiDyoUWRhar663t2EItCxmn2pwSJ3zP4qQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent#
+
+If we have nodemon, we do not have to restart the server every time we make a change. It restarts automatically
+
+In package.json file, we can configure the scripts file
+for example, if we run the script, "dev": "nodemon index.js"
+if we just run 'dev' it will run 'nodemon index.js'. 'npm run dev' will run the second script
+
+How to structure express project:
+
+server  folder
+ - config folder: contained the protected API keys and settings (does not get pushed to Github)
+ - routes folder: all route handlers grouped by purpose. One file for each group of route handlers
+ - services folder: helper modules and business logic
+ - index.js file: helper modules and business logic
+
+ Mongoose.js is a library which makes things easier when working with Express and MongoDB. Mongoose is a medium between Express and MongoDB
+ MongoDB has the advantage that in every collection of objects, the objects need not be uniform. They can have different properties for every object whereas in SQL they all had to be the same
+
+ A model class in Mongoose can have access to all objects within a collection in MongoDB
+ 1 Model Class in Javascript maps to 1 Collection in MongoDB
+ 1 Model Instance in Javascript maps to 1 Collections Instance in MongoDB
+
+ To get MongoDB for personal projects there are 2 ways
+ 1) Install a local copy
+ 2) Use a remote instance (much easier). We will instead use React, Express, and Mongoose on our local machine
+
+ //to view records in mongoDB - clusters, colkections, DBTest - users
+
+ // mongodb+srv://dbUserY:<password>@cluster0.jofzm.mongodb.net/<dbname>?retryWrites=true&w=
+ // username: dbUserY
+ //password: XgncukE7FvRvROMu
+
+ Production Credentials for Heorku:
+
+ Client ID: 132477001477-d1u3higel42dtn7amubi5370kq8936ld.apps.googleusercontent.com
+ Client Secret: fRuC_C-aCXMYQ6nuPoSizGHC

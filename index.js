@@ -7,11 +7,35 @@ On server side, we use const express = require('express')
 */
 
 const express = require("express");
+const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("./config/keys");
+// unnecessary to assign variable since require statement does not return anything. We simply want to execute the file, that's all
+// const passportConfig = require("./services/passport");
+// simply calling require will execute what is in the require file
+
+// order of require statements matters
+require("./models/User");
+require("./services/passport");
+
+mongoose.connect(keys.mongoURI);
 
 const app = express();
+
+// cookie will last 30 days (in milliseconds)
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey],
+  })
+);
+
+//
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./routes/authRoutes")(app); // goes to the module.exports function in the authRoutes file with the parameter app
 
 // telling passport that we can use this strategy to authenticate users
 // new GoogleStrategy(Client ID, Client Secret)
@@ -21,37 +45,6 @@ const app = express();
 // the last option in this object
 // is if a user grants permission, the callbackURL appends to the URL to redirect the user to a page on Google to get more information about the user
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClienSecret,
-      callbackURL: "/auth/google/callback",
-    },
-    (accessToken) => {
-      console.log(accessToken);
-    }
-  )
-);
-
-// a route handler that ensures the user gets kicked into the passport flow
-// a user clicks login and then a route handler moves them into passport js
-// (route, action (in code))
-
-// authenticate('google') works because internally, GoogleStrategy is linked to a string called 'Google' and thats why we can authenticate with a string called Google
-// with scope, we ask Google to grant us access to a user's profile and email information (also set strings). There are more such as images, etc.
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
-
-// second argument is an arrow function. All counts as one argument
-// app.get("/", (req, res) => {
-//   res.send({ bye: "buddy" });
-//   // send JSON back to whoever made this request
-// });
 // app is express app to register this route handler with
 // get - get info, post - send info, put - update all the properties of something, delete - delete something, patch - update one or two properties of something
 // '/' indicates to watch for requests trying to access '/' as URL path

@@ -1,4 +1,4 @@
 node_modules
-keys.js
+dev.js
 
 #tells it to not try to commit all the node modules
