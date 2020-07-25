@@ -73,3 +73,9 @@ server  folder
 
  Client ID: 132477001477-d1u3higel42dtn7amubi5370kq8936ld.apps.googleusercontent.com
  Client Secret: fRuC_C-aCXMYQ6nuPoSizGHC
+
+ // Heroku App
+ // Console.Developers.Google.com to manage Web OAuth
+ // cloud.atlas MongoDB
+
+ better to use https rather than http to manage when handling secure data. The 's' stands for secure

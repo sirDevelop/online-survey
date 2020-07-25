@@ -27,7 +27,11 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback",
+      callbackURL: "/auth/google/callback", //this is a relative path where we do not specify the domain. This causes it to default back to http. Google strategy will figure out the domain
+      // to make sure it defaults to https, we can fill out this callback URL to be absolute or we can specify that when browser goes
+      // through a heroku proxy to out heroku server, it defaults to trusting that proxy and thinking it is secure
+      proxy: true,
+      // tells it to trust the proxy
     },
     (accessToken, refreshToken, profile, done) => {
       // this is mongoose's User
