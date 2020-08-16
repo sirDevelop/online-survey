@@ -79,3 +79,31 @@ server  folder
  // cloud.atlas MongoDB
 
  better to use https rather than http to manage when handling secure data. The 's' stands for secure
+ // react project on client side has its own server. Getting react server and express server to work together nicely is very simple and very straightforward
+ // a package called concurrently we can run them both at the same time. Note we have 2 package.json files - 1 in client directory and 1 in server directory
+ // concurrently runs both commands at the same time
+
+// emaily-dev
+// Client ID: 834953848819-tk4g2j7m2rvqdkd42nbl6pmrsm5enf1h.apps.googleusercontent.com
+// Client Secret: gyAymVSg5kznq1KG782ZuvL1 
+
+//CORS requests - when you are on a port and try to get to a request on a different port. e.g. from localhost:3000 to localhost:5000. CORS request
+// Browser places this upon requests as security
+// the proxy saves us in dev mode. localhost:3000 forwarded to proxy which makes it localhost:5000 request. Proxy saves us from making it a CORS request
+
+// In react, if you have a lower case fileName beginning, then are exporting a function from that class
+// If you have a upper case fileName beginning, then that is a component class
+
+//redux store -> combine reducers -> authReducer (records whether or not the user is logged in)
+                                  -> surveryReducer (records a list of all surverys a user has created)
+//store is 1 big javascript object
+//reducer is a piece of data you want saved in your store
+combine reducers is a built in function that allows you to combine all your reducers into 1 object
+
+In developer tools network tab, you can change settings of internet connection. Fast 3G, Slow 3G, WiFi, etc.
+
+When using statements like 'import' no logic can be done before them.
+But using statements like 'require' logic can be executed before them.
+
+XHR requests - XMLHttpRequest
+Async await syntax can swap out any promise

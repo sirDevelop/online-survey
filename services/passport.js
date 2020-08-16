@@ -33,29 +33,26 @@ passport.use(
       proxy: true,
       // tells it to trust the proxy
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       // this is mongoose's User
       // check for a user where their googleId is equal to mongoose's profile Id
       // does not return a user, returns a promise
-      User.findOne({ googleId: profile.id }).then((existingUser) => {
-        if (existingUser) {
-          // we already have a record with the given profile ID
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        // we already have a record with the given profile ID
 
-          //done has 2 arguments done(error, userRecord that was returned)
-          done(null, existingUser);
-        } else {
-          // we do not have a user record with this ID
-          // .save() saves it to the mongoDB database from the model instance
+        //done has 2 arguments done(error, userRecord that was returned)
+        return done(null, existingUser);
+      }
+      // we do not have a user record with this ID
+      // .save() saves it to the mongoDB database from the model instance
 
-          // to serialize we can use this mongo id. We call serializeUser on this mongo Id to generate an identifying piece of information and store it in a cookie
-          // then when we need to, we use this serializeUser mongoId from a cookie, pass it into deserialize user and turn it into a user
-          new User({ googleId: profile.id })
-            .save()
-            .then((user) => done(null, user));
-          // if save is successful, then we say it is done
-          //we need to call done() to tell passport that we are done. And to proceed with the authentication flow so it does not hang there on the screen
-        }
-      });
+      // to serialize we can use this mongo id. We call serializeUser on this mongo Id to generate an identifying piece of information and store it in a cookie
+      // then when we need to, we use this serializeUser mongoId from a cookie, pass it into deserialize user and turn it into a user
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
+      // if save is successful, then we say it is done
+      //we need to call done() to tell passport that we are done. And to proceed with the authentication flow so it does not hang there on the screen
 
       // console.log("accessToken", accessToken);
       // console.log("refreshToken", refreshToken);

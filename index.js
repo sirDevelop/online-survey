@@ -10,6 +10,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 // unnecessary to assign variable since require statement does not return anything. We simply want to execute the file, that's all
 // const passportConfig = require("./services/passport");
@@ -23,6 +24,9 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
+// will take the request and assign it to bodyParser.json
+app.use(bodyParser.json());
+
 // cookie will last 30 days (in milliseconds)
 app.use(
   cookieSession({
@@ -35,8 +39,23 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./routes/authRoutes")(app); // goes to the module.exports function in the authRoutes file with the parameter app
+//the above 4 app.use() middlewares are applied to every single request that comes into the application
 
+require("./routes/authRoutes")(app); // goes to the module.exports function in the authRoutes file with the parameter app
+require("./routes/billingRoutes")(app); //valid because the require statement returns a function which we immediately call with the parameter (app
+
+if (process.send.NODE_ENV == "production") {
+  // Express will serve up production assets
+  // like our main.js file or main.css file
+  app.use(express.static("client/build"));
+
+  // Express will serve up the index.html file
+  // if it does not recognize the route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 // telling passport that we can use this strategy to authenticate users
 // new GoogleStrategy(Client ID, Client Secret)
 // Client ID is a public token that can be shared with the public. Simply identifies the application with Google Servers

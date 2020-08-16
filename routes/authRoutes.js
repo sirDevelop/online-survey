@@ -16,7 +16,15 @@ module.exports = (app) => {
   //route handler
 
   // once use visits auth/google, server comes back with a code. With the code, we no longer have to enter the OAuth flow, we can directly find user profile details
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/surveys");
+
+      // (res) response redirects to surveys function
+    }
+  );
   //route handler
 
   // second argument is an arrow function. All counts as one argument
@@ -29,8 +37,9 @@ module.exports = (app) => {
   // it takes the request and logs out of the application
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.send(req.user);
+    // res.send(req.user);
     // res.send() proves to whoever is making this request, they are no longer logged in
+    res.redirect("/");
   });
 
   // shows the currently logged in user. Will be emtpy if we log it out
