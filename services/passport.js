@@ -2,7 +2,6 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
-const { deserializeUser } = require("passport");
 
 // this statement pulls the schema out of mongoose
 // mongoose.model. 1 argument means we are pulling a schema out of mongoose, 2 arguments means we are loading a schema into mongoose
