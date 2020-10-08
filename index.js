@@ -18,10 +18,15 @@ const keys = require("./config/keys");
 
 // order of require statements matters
 require("./models/User");
+require("./models/Survey");
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
+// each call to express() generates an app
 const app = express();
 
 // will take the request and assign it to bodyParser.json
